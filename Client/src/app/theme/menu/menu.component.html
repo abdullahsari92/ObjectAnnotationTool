@@ -1,0 +1,81 @@
+<div class="menu " [class.mobile-set-open]="open===true" [class.mobile-set-close]="open===false"  [class.closed]="open===false"  (dblclick)="open=false;emitOpen()" (mouseenter)="open=true;emitOpen()">
+
+            <img class="logo" *ngIf="open" src="../../../assets/svg/fairscope_logo_beyaz.svg" width="190px" height="58px">  
+            <img class="logo" *ngIf="!open" src="../../../assets/svg/fairscope_logo_close.svg" width="80px" height="58px">  
+
+         
+            <span (click)="open=false;emitOpen()" >
+                <mat-icon  class="close openClose" [class.colorBlack]="!open">
+                    keyboard_double_arrow_left</mat-icon>
+            </span>
+       
+        
+                <!-- <img class="close openClose" [class.colorBlack]="!open" (click)="emitOpen(); open=false;"  src="../../../assets/svg/close.svg" alt=""> -->
+      <!-- <mat-icon  class="close openClose {{menuClass}} " (click)="open=!open;emitOpen()"   >
+        chevron_right</mat-icon> -->
+    <div class="flex flex-col">
+<br><br><br>
+        <div class="links" [style.height]="scrHeight+'px'">
+            <div class="menu-item" *ngFor="let item of filteredMenu;let i = index;" >
+                <div class="up" (click)="childrenStatus(i)" (click)="rootLink(item.url)">
+                    <div [class.close-active-parent]="open===false" [class.open-active-parent]="open===true"  *ngIf="openedChildiren.includes(i)"></div>
+                    <div class="left" >
+                        <div class="menu-icon" *ngIf="!openedChildiren.includes(i)" >
+                            <!-- <svg-icon   [src]="'assets/svg/'+item.icon+'.svg'" [svgStyle]="{ 'width.px':20,'height.px':20}"></svg-icon> -->
+
+                            <!-- <img  class="itemIcon" style="-webkit-mask: url('../../../assets/svg/{{item.icon}}.svg') no-repeat 50% 50%; background-color: rgb(182, 22, 22); " src="" alt=""> -->
+                            <mat-icon style="color:rgb(255, 255, 255)">{{item.icon}} </mat-icon>
+           
+                        </div>    
+                        <div class="menu-icon" *ngIf="openedChildiren.includes(i)" >
+                            <!-- <svg-icon   [src]="'assets/svg/'+item.icon+'_black.svg'" [svgStyle]="{ 'width.px':20,'height.px':20}"></svg-icon> -->
+
+                            <mat-icon>{{item.icon}} </mat-icon>
+                        </div>               
+                        <div class="menu-name" [style.color]="openedChildiren.includes(i) ? '#000000' : ''">                      
+                            <span *ngIf="item.noChild" style="font-size: 16px;" >{{item.name}}</span> 
+                        </div>
+                    </div>              
+                </div>          
+                <div class="child" [id]="i+'-children'">
+
+                </div>
+            </div>
+<!-- 
+            <div *ngIf="open" style="background-color: #FFFFFF; border-radius: 5px;  position: absolute; bottom: 10px; left: 7px; width:95%;  text-align: center;   border: 2px solid #70BD88; height: 131px;">
+           
+                <br>
+                <span style=""> {{'TXT_HESAP_BITIM_SURESI' | translate }}</span> 
+                <br>
+                <br>
+
+                <button mat-button class="companyBtn" >
+                    <img src="../../../../assets/svg/premium-beyaz.svg" alt="">    {{'TXT_CONTACT_US' | translate }}
+              </button>
+            </div> -->
+        </div>
+
+ 
+    </div>
+
+
+
+
+</div>
+
+<div class="mobile-menu">
+    <div class="mobile-content">
+        <div class="menu-bar">
+            <!-- <svg-icon *ngIf="!open" (click)="open=!open" src="../../../assets/svg/menu-mobil.svg"
+                [svgStyle]="{ 'width.px':27,'height.px':27,fill:'var(--black)' }">
+            </svg-icon>   -->
+
+            <br>
+            <mat-icon  *ngIf="!open" (click)="open=!open" style="color: white;">
+                menu
+            </mat-icon>
+        </div>
+  
+    </div>
+
+</div>

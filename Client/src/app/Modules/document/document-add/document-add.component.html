@@ -1,0 +1,33 @@
+
+
+
+<div class="row mb-4 align-items-center" style="position: relative;">
+
+
+
+    <form [formGroup]="documentForm">
+
+      <div class="row">
+        <div class="col-lg-12">
+            <as-img-upload controlName="resim" (file)="file($event)"></as-img-upload>
+
+        </div>
+        <div class="col-lg-12">
+    
+        </div>         
+   
+      </div>
+
+       <!-- <as-input  controlName="kutu1" [width]="'220px'" [X]="'300px'"></as-input> -->
+
+       <ng-container *ngComponentOutlet="myComponent; injector: myInjector;" > </ng-container>
+
+      <img [src]="resultFile.file_url" width="600px" height="auto"  *ngIf="resultFile.file_url" alt="">
+
+      <canvas #canvas width="600px" [style]="getBackground()">
+
+        
+      </canvas>
+
+    </form>
+  </div>

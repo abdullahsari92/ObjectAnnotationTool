@@ -1,0 +1,284 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "/node_modules/ag-grid-community/dist/styles/ag-grid.css";
+// @import "../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+@import "/node_modules/ag-grid-community/src/styles/ag-grid.scss";
+// @import "../node_modules/ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";
+@import "/node_modules/ag-grid-community/src/styles/ag-theme-material/sass/ag-theme-material-mixin.scss";
+// @import "../node_modules/ag-grid-community/src/styles/ag-theme-bootstrap/sass/ag-theme-bootstrap.scss";
+
+.ag-theme-material {
+    @include ag-theme-material(( //odd-row-background-color: #CFD8DC;
+    padding: 10px));
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.pageBody {
+    max-width: 1440px;
+    margin-bottom: 60px;
+    position: relative;
+  }
+  
+  .modalBody {
+    max-width: 1440px;
+    position: relative;
+    padding: 30px;
+    //  height: 750px;
+  
+  
+  }
+  
+  .modalBody .modalContent {
+  
+  
+    height: 700px;
+    overflow-y: auto;
+  
+  }
+  
+  .modalBody .rightCrudBtn {
+  
+    z-index: 9999;
+    background-color: white;
+    text-align: right;
+    position: sticky;
+    width: 100%;
+    bottom: 0px;
+    padding: 15px 10px;
+  
+  }
+
+
+  .scroll {
+    overflow-y: auto;
+  }
+  
+  .scrollBody {
+  
+    font-family: Quicksand !important;
+  
+  }
+  
+  .scrollBody ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 30px;
+    text-align: center;
+    top: 0;
+    right: 30px;
+  
+  }
+  
+  .modalBody ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    border-radius: 30px;
+    text-align: center;
+    top: 0;
+    right: 30px;
+  
+  }
+  
+  
+.modalBody .header {
+    font: normal normal bold 18px/23px Quicksand;
+    color: #011E2B;
+    z-index: 9999;
+    background-color: white;
+    position: sticky;
+    width: 100%;
+    top: 0px;
+    padding: 15px 0 25px 0;
+  
+  
+  }
+  
+  @media only screen and (max-height: 800px) {
+  
+    .modalBody {}
+  
+    .modalBody .modalContent {
+  
+      height: 500px;
+      overflow-y: scroll;
+  
+    }
+  }
+
+  
+.pageContent {
+
+    max-width: 1163px;
+    left: 257px;
+    top: 170px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 40px 120px;
+  }
+  
+  .pageListContent {
+  
+    max-width: 1163px;
+    left: 257px;
+    top: 170px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 20px 20px;
+  }
+  
+  .layout-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+  }
+  
+  .error-layout-wrapper {
+    background: black;
+  }
+  
+  .error-layout-wrapper .error-message {
+    color: white;
+    font-weight: 500;
+  }
+  
+  .layout-wrapper .layout-header {
+    position: fixed;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+      0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+    z-index: 2;
+  }
+  
+  .layout-wrapper .layout-header .menu-toggle-button {
+    position: relative;
+  }
+  
+  .layout-wrapper .layout-header .logo {
+    position: relative;
+    text-decoration: none;
+    color: #ffffff;
+    left: 0px;
+    display: block;
+    width: 250px;
+    text-align: left;
+    line-height: 64px;
+    padding-left: 64px;
+    height: 64px;
+    /* background: url(assets/images/logo.png) no-repeat 8px 8px; */
+  }
+  
+  .layout-is-mobile .layout-header .logo {
+    line-height: 56px;
+    padding-left: 56px;
+    height: 56px;
+    background-position: 4px 4px;
+  }
+  
+  .layout-wrapper .layout-header .layout-header-items {
+    position: absolute;
+    right: 0;
+  }
+  
+  .layout-wrapper .layout-container {
+    flex: 1 0 auto;
+    margin-top: 64px;
+  }
+  
+  .layout-is-mobile .layout-container {
+    flex: 1 0 auto;
+    margin-top: 56px;
+  }
+  
+  .layout-wrapper .layout-container .sidenav-list {
+    width: 250px;
+  }
+  
+  .layout-is-mobile .layout-container .sidenav-list {
+    margin-top: 56px;
+  }
+  
+  .layout-sidenav-content {
+    padding: 1em;
+  }
+  
+  .box {
+    width: 330px;
+    background: #fff;
+    border-radius: 10px;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    z-index: 5;
+  }
+  
+  .box-form {
+    min-width: 100%;
+    max-width: 300px;
+    width: 100%;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  
+  
+  .btn-block {
+    width: 100%;
+  }
+  
+  .mat-card {
+  
+    font-family: Quicksand, Helvetica, sans-serif !important;
+  
+  }
+  
+  .mat-card mart-card-header {
+  
+    font-family: Quicksand, Helvetica, sans-serif !important;
+  
+  }
+  
+  
+  .box mat-card-header {
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-weight: 700;
+  }
+  
+  .box mat-card-header mat-card-title {
+    font-size: 30px;
+    margin: 0;
+  }
+  
+  .box mat-card-actions {
+    text-align: center;
+  }
+  
+  .content-card {
+    max-width: 1320px;
+  }
+  
+  .content-card .mat-card-header-text {
+    margin: 0;
+  }
+  
+  .mat-multiline {
+    white-space: normal;
+  }
+  
+  .mat-data-table {
+    width: 100%;
+  }
+  
+  .fs-14 {
+    font-size: 14px;
+  }
