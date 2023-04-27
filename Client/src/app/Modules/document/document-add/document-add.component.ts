@@ -54,7 +54,7 @@ export class DocumentAddComponent implements AfterViewInit, OnInit {
     let title = 'My dynamic title works!';
    // this.myInjector = ReflectiveInjector.resolveAndCreate([{ provide: "width", useValue: '400px' }]);
     this.myInjector =
-    Injector.create({providers: [{provide: width, useValue: { width: '490px' } ,deps: ["400px"]}], parent: injector});
+    Injector.create({providers: [{provide: "width", useValue: { width: '490px' } ,deps: ["400px"]}], parent: injector});
   }
 
 
