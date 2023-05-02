@@ -1,7 +1,7 @@
 
 
 
-<div class="row mb-4 align-items-center" style="position: relative;">
+<div class="row mb-4 align-items-center" >
 
 
 
@@ -20,9 +20,19 @@
 
        <!-- <as-input  controlName="kutu1" [width]="'220px'" [X]="'300px'"></as-input> -->
 
+   
+
+       
+
        <ng-container *ngComponentOutlet="myComponent; injector: myInjector;" > </ng-container>
 
-      <img [src]="resultFile.file_url" width="600px" height="auto"  *ngIf="resultFile.file_url" alt="">
+      <div style="position: relative;">
+
+        <as-input  controlName="kutu1" [width]="item.width" [height]="item.height" [X]="item.X"  [Y]="item.Y" *ngFor="let item of listKutu"></as-input>
+
+        <img [src]="resultFile.file_url" width="600px" height="auto" (click)="kutuEkle($event)" *ngIf="resultFile.file_url" alt="">
+
+       </div>
 
       <canvas #canvas width="600px" [style]="getBackground()">
 

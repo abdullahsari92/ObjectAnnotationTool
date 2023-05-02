@@ -24,6 +24,19 @@ export class DocumentAddComponent implements AfterViewInit, OnInit {
   ctx: CanvasRenderingContext2D | undefined;
   myComponent = InputComponent;
 
+  listKutu:any[] =[{
+    width: '200px',
+    height:'50px',
+    X:'45px',
+    Y:'56px'
+  },
+  {
+    width: '200px',
+    height:'50px',
+    X:'45px',
+    Y:'123px'
+  }
+]
 
    myInputs = {
     width: '430px',
@@ -157,6 +170,21 @@ export class DocumentAddComponent implements AfterViewInit, OnInit {
 
       }
     })
+  }
+
+  kutuEkle(event:any)
+  {
+
+    this.lastX = event.offsetX;
+    this.lastY = event.offsetY; 
+
+    var yeniKutu = {
+      width: '100px',
+      height:'50px',
+      X:this.lastX +'px',
+      Y:this.lastY +'px'
+    }
+    this.listKutu.push(yeniKutu)
   }
 
   update() {
