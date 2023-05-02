@@ -21,17 +21,19 @@ export class MenuComponent implements OnInit ,OnChanges{
       icon: 'home', name: 'Ana Sayfa',url:'admin/',noChild:true
     },
     {
-      icon: 'etiket', name: 'Etiketler',url:'/admin/etiket',  noChild:true
+      icon: 'bookmarks', name: 'Etiketler',url:'/admin/etiket',  noChild:true
     },
    
     {
       icon: 'tune', name: 'Sınıflar',url:'/admin/sinif',noChild:true
     },
     {
-      icon: 'event', name: 'Document',url:'/admin/document',noChild:true
+      icon: 'event', name: 'Document',url:'/admin/document/add',noChild:true
     },
  
-  
+ 
+    
+
 
   ]
   filteredMenu: any[] = [];
