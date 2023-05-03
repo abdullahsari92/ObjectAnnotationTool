@@ -1,7 +1,10 @@
 <div class="menu " [class.mobile-set-open]="open===true" [class.mobile-set-close]="open===false"  [class.closed]="open===false"  (dblclick)="open=false;emitOpen()" (mouseenter)="open=true;emitOpen()">
 
-            <img class="logo" *ngIf="open" src="../../../assets/svg/fairscope_logo_beyaz.svg" width="190px" height="58px">  
+            <!-- <img class="logo" *ngIf="open" src="../../../assets/svg/fairscope_logo_beyaz.svg" width="190px" height="58px">  
             <img class="logo" *ngIf="!open" src="../../../assets/svg/fairscope_logo_close.svg" width="80px" height="58px">  
+ -->
+
+            <div style="font-size: 25px; color: white; text-align: center;"> Object Tool </div>
 
          
             <span (click)="open=false;emitOpen()" >

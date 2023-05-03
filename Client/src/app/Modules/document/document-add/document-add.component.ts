@@ -38,6 +38,11 @@ export class DocumentAddComponent implements AfterViewInit, OnInit {
   }
 ]
 
+  listInput:any[]=[
+
+
+];
+
    myInputs = {
     width: '430px',
     height:'430px',
@@ -139,6 +144,24 @@ export class DocumentAddComponent implements AfterViewInit, OnInit {
 
   }
 
+  kutuEkle(event:any)
+  {
+
+    this.lastX = event.offsetX;
+    this.lastY = event.offsetY;
+var yeniKutu =  {
+      width: '150px',
+      height:'40px',
+      X:this.lastX + 'px',
+      Y:this.lastY + 'px'
+  
+    }
+
+    this.listInput.push(yeniKutu)
+
+
+  }
+
 
   save() {
 
@@ -201,8 +224,6 @@ export class DocumentAddComponent implements AfterViewInit, OnInit {
       }
     })
   }
-
-
 
 
 
