@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Inject, Injector, OnInit, ReflectiveInjector, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Inject, Injector, OnInit, ReflectiveInjector, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
@@ -24,45 +24,29 @@ export class DocumentAddComponent implements AfterViewInit, OnInit {
   ctx: CanvasRenderingContext2D | undefined;
   myComponent = InputComponent;
 
-  listKutu:any[] =[{
-    width: '200px',
-    height:'50px',
-    X:'45px',
-    Y:'56px'
-  },
-  {
-    width: '200px',
-    height:'50px',
-    X:'45px',
-    Y:'123px'
-  }
+  listKutu:any[] =[
 ]
 
-  listInput:any[]=[
-
-
-];
-
-   myInputs = {
-    width: '430px',
-    height:'430px',
-    X:'45px',
-    Y:'56px'
-
-  };
   
   // Kalem özellikleri
   private penColor = 'black';
   private penWidth = 2;
   private isDrawing = false;
-  private lastX: number | undefined;
-  private lastY: number | undefined;
+  private lastX: number =0;
+  private lastY: number =0;
+
+  private firstX: number =0;
+  private firstY: number =0;
+
+listCount =0;
+
   myInjector: Injector | undefined;
   constructor(private fb: FormBuilder,
     private sinifService: DocumentService,
     public asSettingsService: AsSettingsService,
     private router: Router,
-    injector: Injector
+    injector: Injector,
+    private cdf:ChangeDetectorRef
 
   ) {
 
@@ -144,23 +128,7 @@ export class DocumentAddComponent implements AfterViewInit, OnInit {
 
   }
 
-  kutuEkle(event:any)
-  {
 
-    this.lastX = event.offsetX;
-    this.lastY = event.offsetY;
-var yeniKutu =  {
-      width: '150px',
-      height:'40px',
-      X:this.lastX + 'px',
-      Y:this.lastY + 'px'
-  
-    }
-
-    this.listInput.push(yeniKutu)
-
-
-  }
 
 
   save() {
@@ -195,20 +163,71 @@ var yeniKutu =  {
     })
   }
 
+  cancel(id:any)
+  {
+    if(id)
+    {
+
+        var kutu = this.listKutu.find(p=>p.id == id);
+ 
+         const indexNumber = this.listKutu.indexOf(kutu);
+       
+           this.listKutu.splice(indexNumber, 1)
+    }
+
+  }
   kutuEkle(event:any)
   {
+    this.isDrawing = true;
 
-    this.lastX = event.offsetX;
-    this.lastY = event.offsetY; 
+    this.firstX = event.offsetX;
+    this.firstY = event.offsetY; 
 
-    var yeniKutu = {
-      width: '100px',
-      height:'50px',
-      X:this.lastX +'px',
-      Y:this.lastY +'px'
-    }
-    this.listKutu.push(yeniKutu)
+    console.log(' kutuEle - firstX ', this.firstX )
+ 
+    
   }
+  contextmenu(event:any)
+  {
+
+    console.log('dbule.offsetX ',event.offsetX)
+
+   // console.log('listCount',this.listCount)
+     
+           
+     
+    this.listCount = this.listKutu.length;
+        
+          var width = event.offsetX - this.firstX ;
+          var height = event.offsetY - this.firstY ;
+         
+          console.log('  draw',event.offsetX)
+       
+       
+              var yeniKutu = {
+              id:this.listKutu.length+1,
+              width:  width ,
+              height: height,
+              X:this.firstX ,
+              Y:this.firstY
+            }
+    
+          this.listKutu.push(yeniKutu);     
+  
+    
+
+  }
+  mouseUp(event:any)
+  {
+
+
+    console.log(' stopDrawing',event.offsetX)
+    this.isDrawing = false;
+
+  //this.cdf.markForCheck();
+  }
+
+
 
   update() {
     this.sinifService.update(this.documentForm.value).subscribe(res => {
@@ -226,56 +245,81 @@ var yeniKutu =  {
   }
 
 
+  //  @HostListener('click', ['$event'])
+  // startDrawing(event: MouseEvent) {
+  //   this.isDrawing = true;
+  //   this.firstX = event.offsetX;
+  //   this.firstY = event.offsetY;  
 
-  // Kalem çizme işlemleri
-  @HostListener('mousedown', ['$event'])
-  startDrawing(event: MouseEvent) {
-    this.isDrawing = true;
-    this.lastX = event.offsetX;
-    this.lastY = event.offsetY;
+  // }
 
-    const x = 40;
-    const y = 50;
-    const width = 100;
-    const height = 25;
-    // Kutuyu çizin
-    if (this.ctx) {
-      this.ctx.fillStyle = 'white';
-      this.ctx.fillRect(this.lastX, this.lastY, width, height);
+  // @HostListener('mouseclick', ['$event'])
+  // onClick(event:MouseEvent) {
+  
+    
+  //   this.isDrawing = true;
 
-    }
+  //   this.firstX = event.offsetX;
+  //   this.firstY = event.offsetY; 
+
+  //   console.log('  this.firstX ', this.firstX )
+  //   this.listCount +=1 
+
+  // }
+
+
+
+
+
+  //Kalem çizme işlemleri
+  // @HostListener('mousedown', ['$event'])
+  // startDrawing(event: MouseEvent) {
+  //   this.isDrawing = true;
+  //   this.lastX = event.offsetX;
+  //   this.lastY = event.offsetY;
+
+  //   const x = 40;
+  //   const y = 50;
+  //   const width = 100;
+  //   const height = 25;
+  //   // Kutuyu çizin
+  //   if (this.ctx) {
+  //     this.ctx.fillStyle = 'white';
+  //     this.ctx.fillRect(this.lastX, this.lastY, width, height);
+
+  //   }
 
 
  
-    var html ='<as-input  controlName="kutu1" [width]="'+x+'" [X]="'+x+'" [X]="'+y+'"></as-input>';
+  //   var html ='<as-input  controlName="kutu1" [width]="'+x+'" [X]="'+x+'" [X]="'+y+'"></as-input>';
 
 
 
 
-  }
+  // }
 
-  @HostListener('mousemove', ['$event'])
-  draw(event: MouseEvent) {
+  // @HostListener('mousemove', ['$event'])
+  // draw(event: MouseEvent) {
 
-    if (!this.isDrawing) {
-      return;
-    }
-    console.log('ctx ',this.ctx)
+  //   if (!this.isDrawing) {
+  //     return;
+  //   }
+  //   console.log('ctx ',this.ctx)
 
-    this.ctx?.beginPath();
-    this.ctx?.moveTo(this.lastX??90, this.lastY??90);
-    this.ctx?.lineTo(event.offsetX, event.offsetY);
-    // this.ctx?.strokeStyle = this.penColor;
-    // this.ctx?.lineWidth = this.penWidth;
-    this.ctx?.stroke();
-    this.lastX = event.offsetX;
-    this.lastY = event.offsetY;
-  }
+  //   this.ctx?.beginPath();
+  //   this.ctx?.moveTo(this.lastX??90, this.lastY??90);
+  //   this.ctx?.lineTo(event.offsetX, event.offsetY);
+  //   // this.ctx?.strokeStyle = this.penColor;
+  //   // this.ctx?.lineWidth = this.penWidth;
+  //   this.ctx?.stroke();
+  //   this.lastX = event.offsetX;
+  //   this.lastY = event.offsetY;
+  // }
 
-  @HostListener('mouseup')
-  stopDrawing() {
-    this.isDrawing = false;
-  }
+  // @HostListener('mouseup')
+  // stopDrawing() {
+  //   this.isDrawing = false;
+  // }
 
 
 
