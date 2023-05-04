@@ -9,11 +9,11 @@
 
       <div class="row">
         <div class="col-lg-12">
-            <as-img-upload controlName="resim" (file)="file($event)"></as-img-upload>
+            <as-img-upload controlName="image" (file)="file($event)"></as-img-upload>
         </div>       
       </div>
 
-
+      <button mat-button (click)="save()" color="primary" >Kaydet</button>
       <div class="row">
         <div class="col-lg-12">
           <div *ngIf="resultFile.file_url" style="position: relative; cursor: cell;">
@@ -28,14 +28,8 @@
     
            </div>
         </div>       
-      </div>
-    
-    
+      </div>   
 
-      <!-- <canvas #canvas width="600px" [style]="getBackground()">
-
-        
-      </canvas> -->
 
     </form>
   </div>

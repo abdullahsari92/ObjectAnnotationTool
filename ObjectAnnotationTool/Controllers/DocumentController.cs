@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using MVC_PROJE.Helpers;
 using ObjectAnnotationTool.DataAccess;
 using ObjectAnnotationTool.DataAccess.Entity;
 using ObjectAnnotationTool.Models;
@@ -16,10 +17,16 @@ namespace ObjectAnnotationTool.Controllers
         private IRepository<Document> _repositoryDocument;
 
         private  Microsoft.AspNetCore.Hosting.IHostingEnvironment _hostingEnvironment;
+
+
+        private string _RootPath;
+
         public DocumentController(IRepository<Document> repositoryDocument, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment)
         {
             _repositoryDocument = repositoryDocument;
             _hostingEnvironment = hostingEnvironment;
+
+            _RootPath = _hostingEnvironment.WebRootPath;
         }
 
 
@@ -41,15 +48,20 @@ namespace ObjectAnnotationTool.Controllers
 
 
         [HttpPost]
-        public async Task<Document> Add([FromBody] Document etiket)
+        public async Task<Document> Add([FromBody] Document document)
         {
 
 
             Document model = new Document();
             try
             {
-                model = await _repositoryDocument.InsertAsync(etiket) ?? new Document();
 
+              //  model = await _repositoryDocument.InsertAsync(document) ?? new Document();
+
+
+               var byteTo = FileHelper.Base64ToByte(document.Image.Split(',')[1]);
+
+                FileHelper.SaveFile(byteTo, document.Name ?? _RootPath+"yeni");
                 return model;
 
             }

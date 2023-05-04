@@ -105,7 +105,7 @@ export class ImgUploadComponent implements OnInit {
 	}
 	ChangeImg(type: any): void {
 
-		type = type.split("/")[1];
+		
 		setTimeout(() => {
 			if (this.imgURL) {
 				this.formControl.setValue(this.imgURL);

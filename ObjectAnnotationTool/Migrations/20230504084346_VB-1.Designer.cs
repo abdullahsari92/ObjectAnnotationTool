@@ -11,8 +11,8 @@ using ObjectAnnotationTool.DataAccess;
 namespace ObjectAnnotationTool.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20230424152838_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230504084346_VB-1")]
+    partial class VB1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -40,12 +40,12 @@ namespace ObjectAnnotationTool.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(256)");
 
-                    b.Property<int>("SınıfId")
+                    b.Property<int>("SinifId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SınıfId");
+                    b.HasIndex("SinifId");
 
                     b.ToTable("Etiket", (string)null);
                 });
@@ -71,7 +71,7 @@ namespace ObjectAnnotationTool.Migrations
                 {
                     b.HasOne("ObjectAnnotationTool.DataAccess.Entity.Sinif", "Sinif")
                         .WithMany("Etiketler")
-                        .HasForeignKey("SınıfId")
+                        .HasForeignKey("SinifId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

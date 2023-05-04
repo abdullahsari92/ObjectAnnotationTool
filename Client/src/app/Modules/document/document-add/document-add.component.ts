@@ -19,18 +19,10 @@ export class DocumentAddComponent implements AfterViewInit, OnInit {
   isUpdate: boolean = false;
 
   resultFile: FileResult = new FileResult();
-  @ViewChild('canvas') canvas: ElementRef | undefined;
-
-  ctx: CanvasRenderingContext2D | undefined;
-  myComponent = InputComponent;
-
-  listKutu:any[] =[
-]
+  listKutu:any[] =[];
 
   
-  // Kalem özellikleri
-  private penColor = 'black';
-  private penWidth = 2;
+
   private isDrawing = false;
   private lastX: number =0;
   private lastY: number =0;
@@ -46,7 +38,8 @@ listCount =0;
     public asSettingsService: AsSettingsService,
     private router: Router,
     injector: Injector,
-    private cdf:ChangeDetectorRef
+    private cdf:ChangeDetectorRef,
+    private documentService:DocumentService
 
   ) {
 
@@ -62,22 +55,7 @@ listCount =0;
 
   ngAfterViewInit() {
 
-    console.log('this.canvas?.nativeElement ', this.canvas?.nativeElement)
 
-    this.ctx = this.canvas?.nativeElement.getContext('2d') ?? undefined;
-
-
-    // Kutunun çizileceği koordinatları belirleyin
-    const x = 40;
-    const y = 50;
-    const width = 100;
-    const height = 75;
-    // Kutuyu çizin
-    if (this.ctx) {
-      this.ctx.fillStyle = '#f00';
-      this.ctx.fillRect(x, y, width, height);
-
-    }
 
   }
 
@@ -96,20 +74,16 @@ listCount =0;
 
   }
   file(event: any) {
-    console.log(' event', event)
 
     this.resultFile = event;
 
-
-    if (this.ctx)
-      this.ctx.drawImage(this.resultFile.file_url, 0, 0)
 
   }
   initEtiketForm() {
     this.documentForm = this.fb.group({
       id: [0],
-      name: ["", Validators.compose([Validators.required])],
-      resim: ["", Validators.compose([Validators.required])],
+      name: [""],
+      image: ["", Validators.compose([Validators.required])],
       kutu1: [""],
 
     });
@@ -133,10 +107,11 @@ listCount =0;
 
   save() {
 
+    console.log('documentForm ',this.documentForm.value)
     if (this.documentForm.invalid) {
       return;
     }
-    if (this.data.id) {
+    if (this.data?.id) {
       this.update();
     }
     else {
@@ -150,7 +125,7 @@ listCount =0;
     var model = this.documentForm.value;
 
 
-    this.sinifService.add(model).subscribe(res => {
+    this.documentService.add(model).subscribe(res => {
       if (res) {
 
         alert("işlem başarılı")
@@ -217,6 +192,9 @@ listCount =0;
     
 
   }
+
+
+
   mouseUp(event:any)
   {
 
@@ -243,83 +221,6 @@ listCount =0;
       }
     })
   }
-
-
-  //  @HostListener('click', ['$event'])
-  // startDrawing(event: MouseEvent) {
-  //   this.isDrawing = true;
-  //   this.firstX = event.offsetX;
-  //   this.firstY = event.offsetY;  
-
-  // }
-
-  // @HostListener('mouseclick', ['$event'])
-  // onClick(event:MouseEvent) {
-  
-    
-  //   this.isDrawing = true;
-
-  //   this.firstX = event.offsetX;
-  //   this.firstY = event.offsetY; 
-
-  //   console.log('  this.firstX ', this.firstX )
-  //   this.listCount +=1 
-
-  // }
-
-
-
-
-
-  //Kalem çizme işlemleri
-  // @HostListener('mousedown', ['$event'])
-  // startDrawing(event: MouseEvent) {
-  //   this.isDrawing = true;
-  //   this.lastX = event.offsetX;
-  //   this.lastY = event.offsetY;
-
-  //   const x = 40;
-  //   const y = 50;
-  //   const width = 100;
-  //   const height = 25;
-  //   // Kutuyu çizin
-  //   if (this.ctx) {
-  //     this.ctx.fillStyle = 'white';
-  //     this.ctx.fillRect(this.lastX, this.lastY, width, height);
-
-  //   }
-
-
- 
-  //   var html ='<as-input  controlName="kutu1" [width]="'+x+'" [X]="'+x+'" [X]="'+y+'"></as-input>';
-
-
-
-
-  // }
-
-  // @HostListener('mousemove', ['$event'])
-  // draw(event: MouseEvent) {
-
-  //   if (!this.isDrawing) {
-  //     return;
-  //   }
-  //   console.log('ctx ',this.ctx)
-
-  //   this.ctx?.beginPath();
-  //   this.ctx?.moveTo(this.lastX??90, this.lastY??90);
-  //   this.ctx?.lineTo(event.offsetX, event.offsetY);
-  //   // this.ctx?.strokeStyle = this.penColor;
-  //   // this.ctx?.lineWidth = this.penWidth;
-  //   this.ctx?.stroke();
-  //   this.lastX = event.offsetX;
-  //   this.lastY = event.offsetY;
-  // }
-
-  // @HostListener('mouseup')
-  // stopDrawing() {
-  //   this.isDrawing = false;
-  // }
 
 
 
