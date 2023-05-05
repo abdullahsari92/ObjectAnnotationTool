@@ -79,16 +79,23 @@ export class DocumentComponent {
     this.columnDefs = [
       { field: 'id', headerName: "id", sortable: true, filter: true, headerCheckboxSelection: true, headerCheckboxSelectionFilteredOnly: true, checkboxSelection: true, width: 70 },
       { field: 'name', headerName: "Sınıf Adı", minWidth: 130 },
-      { field: 'resim', headerName: "Resim Url", minWidth: 130 },
+      { field: 'path', headerName: "Resim Url", minWidth: 130 },
       
 
       {
         field: 'id', headerName: "Ayarlar", minWidth: 175, cellRenderer: 'agGridActionComponent', cellEditorParams: {
-          values: [{ text: 'UPDATE', icon: 'created' },],
+          values: [{ text: 'UPDATE', icon: 'created' ,action: 'create' },],
         }
       },
     ];
   }
 
+
+  detay(data:any)
+  {
+console.log('detay ',data)
+    this.router.navigate(['../add'], { state: data, relativeTo: this.activatedRoute });
+
+  }
 
 }

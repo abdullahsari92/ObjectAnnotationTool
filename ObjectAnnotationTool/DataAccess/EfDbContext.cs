@@ -21,6 +21,10 @@ namespace ObjectAnnotationTool.DataAccess
 
             modelBuilder.ApplyConfiguration(new EtiketConfiguration());
             modelBuilder.ApplyConfiguration(new SinifConfiguration());
+            modelBuilder.ApplyConfiguration(new DocumentConfiguration());
+
+
+            modelBuilder.Entity<Document>().Ignore(c => c.Image);
 
             base.OnModelCreating(modelBuilder);
         }

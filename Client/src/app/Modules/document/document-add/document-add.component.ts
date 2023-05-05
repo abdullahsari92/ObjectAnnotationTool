@@ -76,15 +76,23 @@ listCount =0;
   file(event: any) {
 
     this.resultFile = event;
+console.log('  this.resultFile ', this.resultFile )
 
+    if(this.documentForm)
+    {
+      this.documentForm.get("file")?.setValue(this.resultFile.file);
+
+    }
 
   }
   initEtiketForm() {
     this.documentForm = this.fb.group({
       id: [0],
-      name: [""],
+      name: [],
       image: ["", Validators.compose([Validators.required])],
       kutu1: [""],
+      file: [],
+
 
     });
     if (this.data.id) {
@@ -97,6 +105,7 @@ listCount =0;
         controls[controlName].setValue(this.data[controlName])
       });
 
+      
 
     }
 

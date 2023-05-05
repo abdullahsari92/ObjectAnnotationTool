@@ -55,13 +55,18 @@ namespace ObjectAnnotationTool.Controllers
             Document model = new Document();
             try
             {
+                var fileName = document.Name ?? DateTime.Now.ToString("ddMMyyyy");
+                fileName = fileName + FileHelper.GetExtensionBase64(document.Image);
 
-              //  model = await _repositoryDocument.InsertAsync(document) ?? new Document();
+                document.Path = FileHelper.GetRootPath() + fileName
 
+                 model = await _repositoryDocument.InsertAsync(document) ?? new Document();
+         
 
-               var byteTo = FileHelper.Base64ToByte(document.Image.Split(',')[1]);
+            
+               var byteTo = FileHelper.Base64ToByte(document.Image);
 
-                FileHelper.SaveFile(byteTo, document.Name ?? _RootPath+"yeni");
+                FileHelper.SaveFile(byteTo,_RootPath + fileName);
                 return model;
 
             }

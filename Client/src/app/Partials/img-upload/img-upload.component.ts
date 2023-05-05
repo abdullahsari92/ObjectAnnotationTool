@@ -67,7 +67,7 @@ export class ImgUploadComponent implements OnInit {
 
 			const reader = new FileReader();
 
-			// console.log('imgFile.target',imgFile.target.files)
+			 console.log('imgFile.target',imgFile.target.files)
 			let file = imgFile.target.files[0];
 			this.resultFile.file = file;
 

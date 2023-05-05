@@ -4,7 +4,7 @@ export class  FileResult{
    
    file_data: any;
    file_ext!:string;
-   file!: File;
+   file!: any;
    description!: string;
    file_type!: string;
    file_size!: string;

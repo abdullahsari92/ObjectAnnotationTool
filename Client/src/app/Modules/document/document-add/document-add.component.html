@@ -9,9 +9,26 @@
 
       <div class="row">
         <div class="col-lg-12">
-            <as-img-upload controlName="image" (file)="file($event)"></as-img-upload>
+            <as-img-upload controlName="image"  (file)="file($event)"></as-img-upload>
+
+        
+
+            
         </div>       
       </div>
+
+      <div class="row justify-content-md-center">
+        <div class="col-lg-6 ">
+
+         <mat-form-field appearance="outline" class="full-width">
+                    <mat-label> Resim Adı</mat-label>
+                    <input matInput type="text" placeholder="Name" formControlName="name" />
+                    <mat-error *ngIf="asSettingsService.isControlHasError('name','required',documentForm)">
+                      <strong> zorunlu </strong>
+                    </mat-error>
+                  </mat-form-field>
+        </div>       
+      </div>   
 
       <button mat-button (click)="save()" color="primary" >Kaydet</button>
       <div class="row">
@@ -23,8 +40,7 @@
      
             <img [src]="resultFile.file_url" (click)="kutuEkle($event)" (contextmenu)="contextmenu($event)" width="auto" height="auto"   alt="">
 
-            <!-- <img [src]="resultFile.file_url"  width="auto" height="auto"   alt=""> -->
-
+    
     
            </div>
         </div>       
@@ -33,3 +49,7 @@
 
     </form>
   </div>
+
+          <!-- <img [src]="resultFile.file_url"  width="auto" height="auto"   alt=""> -->
+          <img  [src]="'/D:/PROJELER/ABDULLAH - GITHUB/PUBLISH/ObjectAnnotationTool/ObjectAnnotationTool/Files/Dağ Calismasi.jpeg'" (file)="file($event)">
+
