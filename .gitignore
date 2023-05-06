@@ -42,4 +42,5 @@ testem.log
 Thumbs.db
 
 /.vs
-/ObjectAnnotationTool/obj
+ObjectAnnotationTool/bin
+ObjectAnnotationTool/obj
