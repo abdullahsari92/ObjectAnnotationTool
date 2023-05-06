@@ -5,7 +5,7 @@
 namespace ObjectAnnotationTool.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class VB1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,7 +20,7 @@ namespace ObjectAnnotationTool.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sınıf", x => x.Id);
+                    table.PrimaryKey("PK_Sinif", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -31,23 +31,23 @@ namespace ObjectAnnotationTool.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "varchar(256)", nullable: false),
                     Description = table.Column<string>(type: "varchar(512)", nullable: false),
-                    SınıfId = table.Column<int>(type: "int", nullable: false)
+                    SinifId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Etiket", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Etiket_Sınıf_SınıfId",
-                        column: x => x.SınıfId,
+                        name: "FK_Etiket_Sinif_SinifId",
+                        column: x => x.SinifId,
                         principalTable: "Sinif",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Etiket_SınıfId",
+                name: "IX_Etiket_SinifId",
                 table: "Etiket",
-                column: "SınıfId");
+                column: "SinifId");
         }
 
         /// <inheritdoc />

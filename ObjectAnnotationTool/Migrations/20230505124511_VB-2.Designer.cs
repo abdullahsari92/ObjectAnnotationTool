@@ -11,8 +11,8 @@ using ObjectAnnotationTool.DataAccess;
 namespace ObjectAnnotationTool.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20230427133716_v2")]
-    partial class v2
+    [Migration("20230505124511_VB-2")]
+    partial class VB2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,26 @@ namespace ObjectAnnotationTool.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("ObjectAnnotationTool.DataAccess.Entity.Document", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Document", (string)null);
+                });
 
             modelBuilder.Entity("ObjectAnnotationTool.DataAccess.Entity.Etiket", b =>
                 {

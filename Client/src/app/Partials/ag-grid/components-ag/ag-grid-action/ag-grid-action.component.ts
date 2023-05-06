@@ -99,6 +99,8 @@ export class AgGridActionComponent implements AgRendererComponent {
   make(item:any) {
 
 
+    console.log(' item',item)
+
     if(item.action == GridActionEnum.create.toString())
     {
       if(!this.localStorageService.getItem("agGridEdit"))

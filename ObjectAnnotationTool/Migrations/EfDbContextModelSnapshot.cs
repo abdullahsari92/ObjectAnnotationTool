@@ -21,6 +21,26 @@ namespace ObjectAnnotationTool.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ObjectAnnotationTool.DataAccess.Entity.Document", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(256)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Document", (string)null);
+                });
+
             modelBuilder.Entity("ObjectAnnotationTool.DataAccess.Entity.Etiket", b =>
                 {
                     b.Property<int>("Id")

@@ -1,5 +1,6 @@
 <br>
-<button (click)="editData()">Document Ekle </button>
+<button  mat-raised-button color="primary" (click)="editData()">Document Ekle </button>
+
 <br>
 <br>
 
@@ -8,4 +9,4 @@
 
 
 
-<as-custom-ag-grid [rowData]="rowData" 	[columnDefs]="columnDefs"> </as-custom-ag-grid>
+<as-custom-ag-grid [rowData]="rowData" (editData)="detay($event)"	[columnDefs]="columnDefs"> </as-custom-ag-grid>

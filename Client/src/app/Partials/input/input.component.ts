@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, forwardRef } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlContainer, FormGroupDirective, FormControl, FormGroup } from '@angular/forms';
 import { ImgUploadComponent } from '../img-upload/img-upload.component';
 
@@ -22,10 +22,16 @@ export class InputComponent implements OnInit {
 	public form!: FormGroup;
 	public formControl!: FormControl;
 
-	@Input() width: any = "300px";
-	@Input() height: any = "100px";
-	@Input() X: any =200;
-	@Input() Y: any = 0;
+	@Input() width: number = 300;
+	@Input() height: number = 50;
+	@Input() X: number =0;
+	@Input() Y: number = 0;
+	@Input() id: number = 0;
+
+
+	@Output() cancel:EventEmitter<any> = new EventEmitter();
+	
+
 
 
 	public fileUploadQueue: any;
@@ -36,8 +42,15 @@ export class InputComponent implements OnInit {
   
   
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+   
   }
 
+
+  close()
+  {
+
+	this.cancel.emit(this.id);
+      
+  }
 }
 

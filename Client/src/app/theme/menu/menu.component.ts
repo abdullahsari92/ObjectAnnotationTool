@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit ,OnChanges{
       icon: 'tune', name: 'Sınıflar',url:'/admin/sinif',noChild:true
     },
     {
-      icon: 'event', name: 'Document',url:'/admin/document/add',noChild:true
+      icon: 'event', name: 'Document',url:'/admin/document/list',noChild:true
     },
  
  
