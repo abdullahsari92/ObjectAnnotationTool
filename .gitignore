@@ -47,4 +47,4 @@ ObjectAnnotationTool/bin
 ObjectAnnotationTool/obj
 .vs/
 /bin
-/obj
+obj/
