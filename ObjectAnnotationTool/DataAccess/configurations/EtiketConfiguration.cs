@@ -17,8 +17,10 @@ internal class EtiketConfiguration : IEntityTypeConfiguration<Etiket>
         builder.ToTable("Etiket");
 
         builder.HasKey(x => x.Id);
-            
-            builder.HasOne(x => x.Sinif).WithMany(y => y.Etiketler).IsRequired().HasForeignKey(x => x.SinifId).OnDelete(DeleteBehavior.Restrict);
+        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+
+
+        builder.HasOne(x => x.Sinif).WithMany(y => y.Etiketler).IsRequired().HasForeignKey(x => x.SinifId).OnDelete(DeleteBehavior.Restrict);
 
         builder.Property(x => x.Name).IsRequired().HasColumnType("varchar(256)");
         builder.Property(x => x.Description).HasColumnType("varchar(512)");

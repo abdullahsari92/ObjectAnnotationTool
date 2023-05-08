@@ -17,10 +17,12 @@ internal class DocumentConfiguration : IEntityTypeConfiguration<Document>
         builder.ToTable("Document");
 
         builder.HasKey(x => x.Id);            
-       
-        builder.Property(x => x.Name).IsRequired().HasColumnType("varchar(256)");      
+        builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-        builder.Property(x => x.ImageBase64);
+        builder.Property(x => x.Name).IsRequired().HasColumnType("varchar(256)");
+        builder.Property(x => x.Path).IsRequired().HasColumnType("varchar(500)");
+
+
 
 
 

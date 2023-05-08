@@ -16,9 +16,12 @@ internal class SinifConfiguration : IEntityTypeConfiguration<Sinif>
         // Tablo adý
         builder.ToTable("Sinif");
 
-        builder.HasKey(x => x.Id);
-            
-      
+       // builder.HasKey(x => x.Id);
+  
+
+        builder.Property(x => x.Id).ValueGeneratedOnAdd().UseIdentityColumn();
+
+
         builder.Property(x => x.Name).IsRequired().HasColumnType("varchar(256)");
   
 

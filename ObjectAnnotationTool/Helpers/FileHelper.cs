@@ -133,8 +133,9 @@ namespace MVC_PROJE.Helpers
 
             string dosya_yolu = GetRootPath() + @"\" + fileName + ".txt";
 
-
-            //Okuma işlem yapacağımız dosyanın yolunu belirtiyoruz.
+            if(File.Exists(dosya_yolu))
+            {
+          //Okuma işlem yapacağımız dosyanın yolunu belirtiyoruz.
             FileStream fs = new FileStream(dosya_yolu, FileMode.Open, FileAccess.Read);
             //Bir file stream nesnesi oluşturuyoruz. 1.parametre dosya yolunu,
             //2.parametre dosyanın açılacağını,
@@ -152,6 +153,12 @@ namespace MVC_PROJE.Helpers
             sw.Close();
             fs.Close();
             return yazi;
+            }
+  
+            else
+            {
+                return "dosya bulunamadı";
+            }
         }
 
 

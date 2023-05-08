@@ -22,8 +22,14 @@ builder.Services.AddScoped<IRepository<Sinif>, Repository<Sinif>>();
 builder.Services.AddHttpClient();
 
 
-string configuration = builder.Configuration.GetConnectionString("MsSqlConnection");
-builder.Services.AddDbContext<EfDbContext>(options => options.UseSqlServer(configuration));
+string configuration = builder.Configuration.GetConnectionString("MySqlConnection");
+//builder.Services.AddDbContext<EfDbContext>(options => options.UseSqlServer(configuration));
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 33));
+
+builder.Services.AddDbContext<EfDbContext>(options => options.UseMySql(configuration, serverVersion));
+
+
+
 builder.Services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
 
 builder.Services.AddControllers();

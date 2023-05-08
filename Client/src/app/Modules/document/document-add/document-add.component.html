@@ -35,6 +35,7 @@
         <div class="col-lg-12">
           <div *ngIf="resultFile.file_url || data.path" style="position: relative; cursor: cell;">
 
+            <label style="color:green" for="">Resmin üzerinde mouse sol tuşuna tıklanarak kutunun sol ust noktası, sonra resim üzernde bir yer seçilir Mouse Sağ tuşana tıklanarak kutunun sağ alt noktasını oluşturup kutu tamamlanır</label>
             <as-input  (edit)="setValue($event,item.id)" [etiketKutu]="item" (cancel)="cancel($event)" [id]="item.id" [width]="item.width" [X]="item.X"  [Y]="item.Y" [height]="item.height"  *ngFor="let item of listKutu"></as-input>
     
      

@@ -41,9 +41,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/.vs
-.vs
+
 ObjectAnnotationTool/bin/
 ObjectAnnotationTool/obj/
+ObjectAnnotationTool/wwwroot/files/
 .vs/
 
