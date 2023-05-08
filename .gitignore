@@ -45,6 +45,6 @@ Thumbs.db
 .vs
 ObjectAnnotationTool/bin
 ObjectAnnotationTool/obj
-
+.vs/
 /bin
 /obj
