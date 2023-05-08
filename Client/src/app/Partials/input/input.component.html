@@ -1,5 +1,7 @@
 
 
-<input class="file-input" type="text" [style.width]="width + 'px'" [style.height]="height + 'px'" [style.left]="X +'px'" [style.top]="Y +'px'" name="resume">
+<input class="file-input" type="text" (keyup)="setValue($event)"  [value]="etiketKutu.value" [style.width]="etiketKutu.width + 'px'" [style.height]="etiketKutu.height + 'px'" [style.left]="etiketKutu.X +'px'" [style.top]="etiketKutu.Y +'px'" [name]="'etiketKutu_' + etiketKutu.id.toString()">
 
-<mat-icon style="position:absolute; cursor: pointer; color: white;" [style.left]="X+ width - 30 + 'px'" [style.top]="Y + 'px'" (click)="close()">cancel</mat-icon>
+<!-- (keyup)="setValue($event)" -->
+
+<mat-icon style="position:absolute; cursor: pointer; color: white;" [style.left]="etiketKutu.X+ etiketKutu.width - 30 + 'px'" [style.top]="etiketKutu.Y + 'px'" (click)="close()">cancel</mat-icon>

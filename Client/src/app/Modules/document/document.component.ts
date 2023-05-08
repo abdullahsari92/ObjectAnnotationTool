@@ -63,7 +63,7 @@ export class DocumentComponent {
   editData(data:any = {}) {
 
 
-    this.router.navigate(['add'], { state: data, relativeTo: this.activatedRoute });
+    this.router.navigate(['../add'], { state: data, relativeTo: this.activatedRoute });
 
   }
 

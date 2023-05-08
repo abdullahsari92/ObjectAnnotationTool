@@ -21,4 +21,16 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\Files\1.txt" />
+    <None Include="wwwroot\Files\2.txt" />
+    <None Include="wwwroot\Files\4.txt" />
+    <None Include="wwwroot\Files\5.txt" />
+    <None Include="wwwroot\Files\ali.jpeg" />
+    <None Include="wwwroot\Files\Dağ Calismasi.jpeg" />
+    <None Include="wwwroot\Files\fssfsffs.jpeg" />
+    <None Include="wwwroot\Files\genel resim.jpeg" />
+    <None Include="wwwroot\Files\yeni.jpeg" />
+  </ItemGroup>
+
 </Project>

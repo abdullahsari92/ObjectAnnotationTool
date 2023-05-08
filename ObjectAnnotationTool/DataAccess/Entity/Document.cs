@@ -9,11 +9,14 @@
 
         public string? Path { get; set; }
 
-        public string Image { get; set; }
+        public string ImageBase64 { get; set; }
 
-    
+        public string Keyword { get; set; }
 
-           
+
+
+
+
 
 
     }

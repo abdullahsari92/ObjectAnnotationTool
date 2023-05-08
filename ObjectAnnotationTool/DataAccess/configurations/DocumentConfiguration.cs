@@ -20,7 +20,7 @@ internal class DocumentConfiguration : IEntityTypeConfiguration<Document>
        
         builder.Property(x => x.Name).IsRequired().HasColumnType("varchar(256)");      
 
-        builder.Property(x => x.Image);
+        builder.Property(x => x.ImageBase64);
 
 
 

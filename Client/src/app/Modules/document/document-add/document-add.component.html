@@ -9,7 +9,7 @@
 
       <div class="row">
         <div class="col-lg-12">
-            <as-img-upload controlName="image"  (file)="file($event)"></as-img-upload>
+            <as-img-upload controlName="ImageBase64"  (file)="file($event)"></as-img-upload>
 
         
 
@@ -33,12 +33,12 @@
       <button mat-button (click)="save()" color="primary" >Kaydet</button>
       <div class="row">
         <div class="col-lg-12">
-          <div *ngIf="resultFile.file_url" style="position: relative; cursor: cell;">
+          <div *ngIf="resultFile.file_url || data.path" style="position: relative; cursor: cell;">
 
-            <as-input  controlName="kutu1" (cancel)="cancel($event)" [id]="item.id" [width]="item.width" [X]="item.X"  [Y]="item.Y" [height]="item.height"   *ngFor="let item of listKutu"></as-input>
+            <as-input  (edit)="setValue($event,item.id)" [etiketKutu]="item" (cancel)="cancel($event)" [id]="item.id" [width]="item.width" [X]="item.X"  [Y]="item.Y" [height]="item.height"  *ngFor="let item of listKutu"></as-input>
     
      
-            <img [src]="resultFile.file_url" (click)="kutuEkle($event)" (contextmenu)="contextmenu($event)" width="auto" height="auto"   alt="">
+            <img [src]=" data.path ? asSettingsService.siteUrl + data.path : resultFile.file_url" (click)="kutuEkle($event)" (contextmenu)="contextmenu($event)" width="auto" style="max-width: 1200px;" height="auto"   alt="">
 
     
     
@@ -49,7 +49,3 @@
 
     </form>
   </div>
-
-          <!-- <img [src]="resultFile.file_url"  width="auto" height="auto"   alt=""> -->
-          <img  [src]="'/D:/PROJELER/ABDULLAH - GITHUB/PUBLISH/ObjectAnnotationTool/ObjectAnnotationTool/Files/Dağ Calismasi.jpeg'" (file)="file($event)">
-

@@ -1,0 +1,1 @@
+{"listKutu":[{"id":1,"width":132,"height":83,"X":77,"Y":95,"value":""},{"id":2,"width":106,"height":40,"X":109,"Y":209,"value":""}]}

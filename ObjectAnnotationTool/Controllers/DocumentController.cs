@@ -37,10 +37,14 @@ namespace ObjectAnnotationTool.Controllers
 
             var model = new ListModel<Document>();
 
-           var etiketler = await _repositoryDocument.GetAll();
+           var documents = await _repositoryDocument.GetAll();
 
-            model.Items = etiketler.ToList();
+            model.Items = documents.ToList();
 
+            foreach (var document in model.Items) {
+
+                document.Keyword = FileHelper.DosyadanOku(document.Id.ToString());
+            }
 
             return model;
 
@@ -56,17 +60,17 @@ namespace ObjectAnnotationTool.Controllers
             try
             {
                 var fileName = document.Name ?? DateTime.Now.ToString("ddMMyyyy");
-                fileName = fileName + FileHelper.GetExtensionBase64(document.Image);
+                fileName = fileName + FileHelper.GetExtensionBase64(document.ImageBase64);
 
-                document.Path = FileHelper.GetRootPath() + fileName
+                document.Path = "files/" + fileName;
 
                  model = await _repositoryDocument.InsertAsync(document) ?? new Document();
-         
 
-            
-               var byteTo = FileHelper.Base64ToByte(document.Image);
+                FileHelper.DosyaYaz(document.Keyword, document.Id.ToString());
 
-                FileHelper.SaveFile(byteTo,_RootPath + fileName);
+                 var byteTo = FileHelper.Base64ToByte(document.ImageBase64);
+
+                FileHelper.SaveFile(byteTo,fileName);
                 return model;
 
             }
@@ -77,76 +81,6 @@ namespace ObjectAnnotationTool.Controllers
             }
 
         }
-
-           public void dosyadanOku()
-        {
-            string dosya_yolu = @"D:\metinbelgesi.txt";
-            //Okuma işlem yapacağımız dosyanın yolunu belirtiyoruz.
-            FileStream fs = new FileStream(dosya_yolu, FileMode.Open, FileAccess.Read);
-            //Bir file stream nesnesi oluşturuyoruz. 1.parametre dosya yolunu,
-            //2.parametre dosyanın açılacağını,
-            //3.parametre dosyaya erişimin veri okumak için olacağını gösterir.
-            StreamReader sw = new StreamReader(fs);
-            //Okuma işlemi için bir StreamReader nesnesi oluşturduk.
-           string yazi = "";
-
-            string dosya_yolu1 = @"D:\Yazilan.txt";
-            FileStream fs2 = new FileStream(dosya_yolu1, FileMode.OpenOrCreate, FileAccess.Write);
-            StreamWriter sw2 = new StreamWriter(fs2);
-
-            while (yazi != null)
-            {
-                Console.WriteLine(yazi);
-                yazi = sw.ReadLine();
-                //İşlem yapacağımız dosyanın yolunu belirtiyoruz.
-
-                if (yazi != null)
-                {
-                    var deger = yazi.Split(',');
-                    if (!deger[0].Contains("\t"))
-                    {
-                        var sonuc = deger[0] + "," + deger[1];
-                        sw2.WriteLine(sonuc);
-                    }
-                }
-            }
-
-            sw2.Flush();
-            //Veriyi tampon bölgeden dosyaya aktardık.
-            sw2.Close();
-            fs2.Close();
-            //Satır satır okuma işlemini gerçekleştirdik ve ekrana yazdırdık
-            //Son satır okunduktan sonra okuma işlemini bitirdik
-            sw.Close();
-            fs.Close();
-            //İşimiz bitince kullandığımız nesneleri iade ettik.
-        }
-           private void dosyayaYaz(string gelen)
-      {
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            string contentRootPath = _hostingEnvironment.ContentRootPath;
-
-           
-          string dosya_yolu = webRootPath + @"\Yazilan.txt";
-          //İşlem yapacağımız dosyanın yolunu belirtiyoruz.
-          FileStream fs = new FileStream(dosya_yolu, FileMode.Append, FileAccess.Write);
-
-
-      
-            //   var deger = gelen.Split(',');
-
-            //  var sonuc = "eposta: " + deger[0] + "; şifre: " + deger[1];
-            StreamWriter sw = new StreamWriter(fs);
-          sw.WriteLine(gelen);
-         
-
-          sw.Flush();
-          //Veriyi tampon bölgeden dosyaya aktardık.
-          sw.Close();
-          fs.Close();
-          //İşimiz bitince kullandığımız nesneleri iade ettik.
-      }
-
 
   
     }

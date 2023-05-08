@@ -2,6 +2,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { EtiketKutu } from 'src/app/Model/etiketKutu';
 import { FileResult } from 'src/app/Model/fileResult';
 import { InputComponent } from 'src/app/Partials/input/input.component';
 import { AsSettingsService } from 'src/app/services/as-settings.service';
@@ -19,7 +20,7 @@ export class DocumentAddComponent implements AfterViewInit, OnInit {
   isUpdate: boolean = false;
 
   resultFile: FileResult = new FileResult();
-  listKutu:any[] =[];
+  listKutu:EtiketKutu[] =[];
 
   
 
@@ -45,7 +46,7 @@ listCount =0;
 
  
     this.data = this.router.getCurrentNavigation()?.extras.state;
-
+console.log('   this.data ',  this.data )
     let title = 'My dynamic title works!';
    // this.myInjector = ReflectiveInjector.resolveAndCreate([{ provide: "width", useValue: '400px' }]);
     this.myInjector =
@@ -89,7 +90,7 @@ console.log('  this.resultFile ', this.resultFile )
     this.documentForm = this.fb.group({
       id: [0],
       name: [],
-      image: ["", Validators.compose([Validators.required])],
+      ImageBase64: ["", Validators.compose([Validators.required])],
       kutu1: [""],
       file: [],
 
@@ -105,6 +106,9 @@ console.log('  this.resultFile ', this.resultFile )
         controls[controlName].setValue(this.data[controlName])
       });
 
+
+      console.log(' JSON.parse( this.data.keyword) ', JSON.parse( this.data.keyword))
+      this.listKutu =  JSON.parse( this.data.keyword).listKutu;
       
 
     }
@@ -133,6 +137,8 @@ console.log('  this.resultFile ', this.resultFile )
 
     var model = this.documentForm.value;
 
+    var listKutu = this.listKutu;
+    model.keyword = JSON.stringify({ listKutu})
 
     this.documentService.add(model).subscribe(res => {
       if (res) {
@@ -152,7 +158,7 @@ console.log('  this.resultFile ', this.resultFile )
     if(id)
     {
 
-        var kutu = this.listKutu.find(p=>p.id == id);
+        var kutu = this.listKutu.find(p=>p.id == id) ?? new EtiketKutu();
  
          const indexNumber = this.listKutu.indexOf(kutu);
        
@@ -188,12 +194,13 @@ console.log('  this.resultFile ', this.resultFile )
           console.log('  draw',event.offsetX)
        
        
-              var yeniKutu = {
+              var yeniKutu:EtiketKutu = {
               id:this.listKutu.length+1,
               width:  width ,
               height: height,
               X:this.firstX ,
-              Y:this.firstY
+              Y:this.firstY,
+              value:''
             }
     
           this.listKutu.push(yeniKutu);     
@@ -202,7 +209,22 @@ console.log('  this.resultFile ', this.resultFile )
 
   }
 
+  setValue(value:any,id:any)
+  {
 
+    console.log('event ',value)
+   var yeniItem =  this.listKutu.find(p=>p.id==id) ?? new EtiketKutu();
+  let index = this.listKutu.indexOf(yeniItem);
+
+   yeniItem.value = value; 
+
+
+  this.listKutu[index] =yeniItem;
+
+
+  console.log(' listKutu',this.listKutu)
+  }
+ 
 
   mouseUp(event:any)
   {

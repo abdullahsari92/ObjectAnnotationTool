@@ -15,7 +15,7 @@ export class AsSettingsService {
   apiUrl = environment.apiUrl;
 
 
-siteUrl ="https://localhost:7031/api"
+siteUrl ="https://localhost:7031/"
 
 
   selectedStatus = { key: -1, value: '[Tümü]' };

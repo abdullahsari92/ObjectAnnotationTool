@@ -24,7 +24,9 @@ namespace ObjectAnnotationTool.DataAccess
             modelBuilder.ApplyConfiguration(new DocumentConfiguration());
 
 
-            modelBuilder.Entity<Document>().Ignore(c => c.Image);
+            modelBuilder.Entity<Document>().Ignore(c => c.ImageBase64);
+            modelBuilder.Entity<Document>().Ignore(c => c.Keyword);
+
 
             base.OnModelCreating(modelBuilder);
         }
