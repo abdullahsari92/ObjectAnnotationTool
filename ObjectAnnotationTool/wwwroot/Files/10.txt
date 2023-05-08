@@ -1,1 +1,0 @@
-{"listKutu":[{"id":1,"width":417,"height":207,"X":91,"Y":523,"value":"çiçek"},{"id":2,"width":384,"height":278,"X":339,"Y":75,"value":"cami"}]}

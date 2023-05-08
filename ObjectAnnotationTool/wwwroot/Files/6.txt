@@ -1,1 +1,0 @@
-{"listKutu":[{"id":1,"width":80,"height":34,"X":104,"Y":51,"value":"ev"},{"id":2,"width":106,"height":73,"X":335,"Y":235,"value":"kapı"},{"id":3,"width":50,"height":36,"X":85,"Y":323,"value":"insan"}]}

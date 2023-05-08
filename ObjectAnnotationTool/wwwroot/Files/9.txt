@@ -1,1 +1,0 @@
-{"listKutu":[{"id":1,"width":171,"height":68,"X":308,"Y":243,"value":"kpaı"},{"id":2,"width":190,"height":53,"X":48,"Y":27,"value":"ev"},{"id":3,"width":76,"height":26,"X":376,"Y":146,"value":"baca"},{"id":4,"width":257,"height":171,"X":27,"Y":175,"value":"sol giriş"}]}

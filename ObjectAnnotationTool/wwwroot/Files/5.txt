@@ -1,1 +1,0 @@
-{"listKutu":[{"id":1,"width":121,"height":60,"X":114,"Y":111,"value":"abdullah"},{"id":2,"width":237,"height":71,"X":53,"Y":221,"value":"sarı"}]}
