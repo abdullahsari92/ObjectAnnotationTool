@@ -1,12 +1,13 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, Inject, Injector, OnInit, ReflectiveInjector, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component,Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { EtiketKutu } from 'src/app/Model/etiketKutu';
 import { FileResult } from 'src/app/Model/fileResult';
-import { InputComponent } from 'src/app/Partials/input/input.component';
 import { AsSettingsService } from 'src/app/services/as-settings.service';
 import { DocumentService } from 'src/app/services/document.service';
+import { tap } from 'rxjs/operators';
+import { EtiketService } from 'src/app/services/etiket.service';
 
 @Component({
   selector: 'as-document-add',
@@ -40,7 +41,8 @@ listCount =0;
     private router: Router,
     injector: Injector,
     private cdf:ChangeDetectorRef,
-    private documentService:DocumentService
+    private documentService:DocumentService,
+    private etiketService:EtiketService
 
   ) {
 
@@ -62,10 +64,10 @@ console.log('   this.data ',  this.data )
 
   ngOnInit(): void {
 
+    this.initEtiketForm();
+    this.getETiketlist();
 
 
-
-    this.initEtiketForm()
   }
 
 
@@ -87,6 +89,8 @@ console.log('  this.resultFile ', this.resultFile )
 
   }
   initEtiketForm() {
+
+
     this.documentForm = this.fb.group({
       id: [0],
       name: [],
@@ -116,6 +120,24 @@ console.log('  this.resultFile ', this.resultFile )
   }
 
 
+  etiketList:any[] =[];
+  getETiketlist()
+  {
+
+    this.etiketService.getList().pipe( tap(res =>{     
+      
+      if(res)
+      {
+           this.etiketList = res.items;
+
+           
+      }
+    }) ) .subscribe(res=>{    
+   
+    },err =>{
+      console.log(' errr',err)
+    })
+  }
 
 
   save() {

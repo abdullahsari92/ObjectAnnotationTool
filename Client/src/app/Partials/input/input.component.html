@@ -1,6 +1,13 @@
 
 
-<input class="file-input" type="text" (keyup)="setValue($event)"  [value]="etiketKutu.value" [style.width]="etiketKutu.width + 'px'" [style.height]="etiketKutu.height + 'px'" [style.left]="etiketKutu.X +'px'" [style.top]="etiketKutu.Y +'px'" [name]="'etiketKutu_' + etiketKutu.id.toString()">
+<input class="file-input" type="text" (keyup)="setValue($event)" autocomplete="off" (click)="isSelecetEtiket=true"  [value]="etiketKutu.value" [style.width]="etiketKutu.width + 'px'" [style.height]="etiketKutu.height + 'px'" [style.left]="etiketKutu.X +'px'" [style.top]="etiketKutu.Y +'px'" [name]="'etiketKutu_' + etiketKutu.id.toString()">
+
+
+  <mat-list role="list" *ngIf="isSelecetEtiket" style="position: absolute; background-color: white; " [style.left]="etiketKutu.X +'px'" [style.top]="etiketKutu.Y + etiketKutu.height + 20 +'px'" >
+    <mat-list-item *ngFor="let item of etiketList" (click)="setEtiketValue(item.name)" role="listitem">{{item.name}}</mat-list-item>
+     <mat-divider></mat-divider>
+
+  </mat-list>
 
 <!-- (keyup)="setValue($event)" -->
 

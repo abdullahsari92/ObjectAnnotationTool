@@ -23,7 +23,7 @@ export class InputComponent implements OnInit {
 	public form!: FormGroup;
 	public formControl!: FormControl;
 
-
+isSelecetEtiket:boolean=false;
 	@Input() etiketKutu: EtiketKutu =  {
 
         width: 300,
@@ -34,11 +34,8 @@ export class InputComponent implements OnInit {
 		value:''
 	}
 
-	@Input() width: number = 300;
-	@Input() height: number = 50;
-	@Input() X: number =0;
-	@Input() Y: number = 0;
-	@Input() id: number = 0;
+	@Input() etiketList:any[]=[];
+
 
 
 	@Output() cancel:EventEmitter<any> = new EventEmitter();
@@ -66,10 +63,18 @@ export class InputComponent implements OnInit {
 
 	this.edit.emit(event.target.value);
   }
+  setEtiketValue(data:any)
+  {
+
+	this.isSelecetEtiket = false;
+	this.etiketKutu.value = data;
+
+	this.edit.emit(data);
+  }
   close()
   {
 
-	this.cancel.emit(this.id);
+	this.cancel.emit(this.etiketKutu.id);
       
   }
 }
