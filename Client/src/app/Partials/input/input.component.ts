@@ -60,7 +60,7 @@ isSelecetEtiket:boolean=false;
 
   setValue(event:any)
   {
-
+this.isSelecetEtiket = false;
 	this.edit.emit(event.target.value);
   }
   setEtiketValue(data:any)
